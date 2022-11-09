@@ -1,0 +1,98 @@
+@import './variable.scss';
+
+@mixin bg_color() {
+  // 属性选择器
+  [data-theme='theme'] & {
+    background-color: $background_color_theme;
+  }
+  [data-theme='theme1'] & {
+    background-color: $background_color_theme1;
+  }
+  [data-theme='theme2'] & {
+    background-color: $background_color_theme2;
+  }
+}
+
+@mixin font_active_color() {
+  color: $font-active-color-theme;
+  [data-theme='theme1'] & {
+    color: $font-active-color-theme1;
+  }
+  [data-theme='theme2'] & {
+    color: $font-active-color-theme2;
+  }
+}
+
+@mixin bg_sub_color() {
+  background: $background-color-sub-theme;
+  [data-theme=theme1] & {
+    background: $background-color-sub-theme1;
+  }
+  [data-theme=theme2] & {
+    background: $background-color-sub-theme2;
+  }
+}
+
+@mixin border_color() {
+  border-color: $border-color-theme;
+  [data-theme='theme1'] & {
+    border-color: $border-color-theme1;
+  }
+  [data-theme='theme2'] & {
+    border-color: $border-color-theme2;
+  }
+}
+
+// 限制行数,行数传参
+@mixin clamp($row) {
+  overflow: hidden;
+  // ellipsis:当对象内文本溢出时显示省略标记(...)。
+  text-overflow: ellipsis;
+  // 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+  // display:box 在元素上设置该属性，可使其子代排列在同一水平上，类似display:inline-block;。
+  display: -webkit-box;
+  // 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式
+  -webkit-box-orient: vertical;
+  // -webkit-line-clamp 用来限制在一个块元素显示的文本的行数，从第几行开始裁剪
+  -webkit-line-clamp: $row;
+
+}
+
+// 动态换背景图片
+@mixin bg_img($url) {
+  // 根据主题加入不同后缀，实现换图
+  [data-theme=theme] & {
+    background-image: url($url + '_163.png');
+  }
+  [data-theme=theme1] & {
+    background-image: url($url + '_qq.png');
+  }
+  [data-theme=theme2] & {
+    background-image: url($url + '_xm.png');
+  }
+  background-size: cover;
+  background-repeat: no-repeat;
+  // 根据不同dpr加载大中小单重图片
+  [data-theme=theme][data-dpr='2'] & {
+    background-image: url($url + '_163@2x.png');
+  }
+  [data-theme=theme][data-dpr='3'] & {
+    background-image: url($url + '_163@3x.png');
+  }
+
+
+  [data-theme=theme1][data-dpr='2'] & {
+    background-image: url($url + '_qq@2x.png');
+  }
+  [data-theme=theme1][data-dpr='3'] & {
+    background-image: url($url + '_qq@3x.png');
+  }
+
+  [data-theme=theme2][data-dpr='2'] & {
+    background-image: url($url + '_xm@2x.png');
+  }
+  [data-theme=theme2][data-dpr='3'] & {
+    background-image: url($url + '_xm@3x.png');
+  }
+
+}
